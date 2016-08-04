@@ -1,5 +1,7 @@
 #!/bin/sh
 
+fancy_echo "Running local file"
+
 #brew "phantomjs"
 #brew "watchman"
 #brew "gpg"

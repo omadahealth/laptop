@@ -19,6 +19,14 @@ We support:
 Older versions may work but aren't regularly tested. Bug reports for older
 versions are welcome.
 
+Pre-installation steps
+----------------------
+
+This script assumes you have gone through the steps outlined in the
+[engineering onboarding][https://wiki.omadahealth.net/doku.php?id=engineering:onboarding] wiki
+and have set up your Github profile before running.
+
+
 Install
 -------
 
@@ -29,10 +37,6 @@ curl --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/m
 less mac
 sh mac 2>&1 | tee ~/laptop.log
 ```
-
-Optionally, [install thoughtbot/dotfiles][dotfiles].
-
-[dotfiles]: https://github.com/thoughtbot/dotfiles#install
 
 Debugging
 ---------
@@ -52,62 +56,35 @@ Mac OS X tools:
 
 [Homebrew]: http://brew.sh/
 
+Dotfiles:
+
+* [Omada's Dotfiles] to standardize the dev experience between machines
+
+[Omada's Dotfiles]: https://github.com/omadahealth/dotfiles
+
 Unix tools:
 
-* [Exuberant Ctags] for indexing files for vim tab completion
 * [Git] for version control
 * [OpenSSL] for Transport Layer Security (TLS)
-* [RCM] for managing company and personal dotfiles
-* [The Silver Searcher] for finding things in files
-* [Tmux] for saving project state and switching between projects
-* [Zsh] as your shell
+* [Coreutils] provides the GNU version of the stat command
 
-[Exuberant Ctags]: http://ctags.sourceforge.net/
 [Git]: https://git-scm.com/
 [OpenSSL]: https://www.openssl.org/
-[RCM]: https://github.com/thoughtbot/rcm
-[The Silver Searcher]: https://github.com/ggreer/the_silver_searcher
-[Tmux]: http://tmux.github.io/
-[Zsh]: http://www.zsh.org/
+[Coreutils]: http://www.gnu.org/software/coreutils/coreutils.html
 
-Heroku tools:
-
-* [Heroku Toolbelt] and [Parity] for interacting with the Heroku API
-
-[Heroku Toolbelt]: https://toolbelt.heroku.com/
-[Parity]: https://github.com/thoughtbot/parity
-
-GitHub tools:
-
-* [Hub] for interacting with the GitHub API
-
-[Hub]: http://hub.github.com/
 
 Image tools:
 
 * [ImageMagick] for cropping and resizing images
 
-Testing tools:
-
-* [Qt] for headless JavaScript testing via Capybara Webkit
-
-[Qt]: http://qt-project.org/
+[ImageMagick]: http://www.imagemagick.org/script/index.php
 
 Programming languages and configuration:
 
 * [Bundler] for managing Ruby libraries
 * [Node.js] and [NPM], for running apps and installing JavaScript packages
-* [Rbenv] for managing versions of Ruby
-* [Ruby Build] for installing Rubies
+* [RVM] for managing versions of Ruby
 * [Ruby] stable for writing general-purpose code
-
-[Bundler]: http://bundler.io/
-[ImageMagick]: http://www.imagemagick.org/
-[Node.js]: http://nodejs.org/
-[NPM]: https://www.npmjs.org/
-[Rbenv]: https://github.com/sstephenson/rbenv
-[Ruby Build]: https://github.com/sstephenson/ruby-build
-[Ruby]: https://www.ruby-lang.org/en/
 
 Databases:
 
@@ -119,11 +96,26 @@ Databases:
 
 It should take less than 15 minutes to install (depends on your machine).
 
+
 Customize in `~/.laptop.local`
 ------------------------------
 
 Your `~/.laptop.local` is run at the end of the Laptop script.
 Put your customizations there.
+
+Optional tools currently in `laptop.local`
+If you want to install these, uncomment them from the `laptop.local` file.
+
+* [Qt] for headless JavaScript testing via Capybara Webkit
+* [PhantomJS] for JavaScript testing
+* [Watchman] watches files and records, or triggers actions, when they change
+* [GPG] for management of PGP keys
+
+[Qt]: http://qt-project.org/
+[PhantomJS]: http://phantomjs.org/
+[Watchman]: https://github.com/facebook/watchman
+[GPG]: https://www.gnupg.org/
+
 For example:
 
 ```sh

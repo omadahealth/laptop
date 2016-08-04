@@ -24,8 +24,7 @@ Pre-installation steps
 
 This script assumes you have gone through the steps outlined in the
 [engineering onboarding][https://wiki.omadahealth.net/doku.php?id=engineering:onboarding] wiki
-and have set up your Github profile before running.
-
+and have set up your Github profile with your ssh keys before running.
 
 Install
 -------
@@ -95,7 +94,6 @@ Databases:
 [Redis]: http://redis.io/
 
 It should take less than 15 minutes to install (depends on your machine).
-
 
 Customize in `~/.laptop.local`
 ------------------------------
@@ -169,23 +167,13 @@ Contributing
 
 Edit the `mac` file.
 Document in the `README.md` file.
-Follow shell style guidelines by using [ShellCheck] and [Syntastic].
+Follow shell style guidelines by using [ShellCheck].
 
 ```sh
 brew install shellcheck
 ```
 
 [ShellCheck]: http://www.shellcheck.net/about.html
-[Syntastic]: https://github.com/scrooloose/syntastic
-
-Thank you, [contributors]!
-
-[contributors]: https://github.com/thoughtbot/laptop/graphs/contributors
-
-By participating in this project,
-you agree to abide by the thoughtbot [code of conduct].
-
-[code of conduct]: https://thoughtbot.com/open-source-code-of-conduct
 
 License
 -------
@@ -195,18 +183,3 @@ It is free software,
 and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: LICENSE
-
-About thoughtbot
-----------------
-
-![thoughtbot](https://thoughtbot.com/logo.png)
-
-Laptop is maintained and funded by thoughtbot, inc.
-The names and logos for thoughtbot are trademarks of thoughtbot, inc.
-
-We are passionate about open source software.
-See [our other projects][community].
-We are [available for hire][hire].
-
-[community]: https://thoughtbot.com/community?utm_source=github
-[hire]: https://thoughtbot.com?utm_source=github

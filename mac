@@ -43,6 +43,15 @@ if [ ! -f "$HOME/.bash_profile" ]; then
   touch "$HOME/.bash_profile"
 fi
 
+if [ ! -f "$HOME/workspace" ]; then
+  mkdir "$HOME/workspace"
+fi
+
+if [ ! -f "$HOME/workspace/dotfiles" ]; then
+  git clone git@github.com:omadahealth/dotfiles.git "$HOME/workspace"
+  append_to_bash_profile'source "$HOME/workspace/dotfiles/dotfiles.sh"'
+fi
+
 # shellcheck disable=SC2016
 append_to_bash_profile 'export PATH="$HOME/.bin:$PATH"'
 

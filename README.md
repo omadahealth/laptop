@@ -100,8 +100,10 @@ It should take less than 15 minutes to install (depends on your machine).
 Customize in `~/.laptop.local`
 ------------------------------
 
-Your `~/.laptop.local` is run at the end of the Laptop script.
+Your ~/.laptop.local is run at the end of the mac script.
 Put your customizations there.
+This repo already contains a .laptop.local you can use to get started.
+(If you decide to use the example, copy/move it to your home directory)
 
 Optional tools currently in `laptop.local`
 If you want to install these, uncomment them from the `laptop.local` file.

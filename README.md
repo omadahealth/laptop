@@ -37,6 +37,8 @@ less mac
 sh mac 2>&1 | tee ~/laptop.log
 ```
 
+Once the script is done, it's a good idea to quit and relaunch Terminal.
+
 Debugging
 ---------
 

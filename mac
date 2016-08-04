@@ -52,7 +52,7 @@ brew_cask_install() {
 }
 
 gem_install_or_update() {
-  if gem list "$1" --installed > /dev/null; then
+  if gem list "$1" | grep "^$1 ("; then
     gem update "$@"
   else
     gem install "$@"
@@ -171,8 +171,6 @@ brew "coreutils" #provides the GNU version of the stat command
 # Text editors
 brew "vim"
 
-# Password manager
-brew_cask_install "lastpass"
 
 # Programming languages
 brew "node"

@@ -52,3 +52,10 @@
 #cd -
 
 ###################################################
+
+# Optional Applications
+#Lastpass for password management
+#if ! app_is_installed "lastpass"; then brew_cask_install "lastpass"; fi
+
+#Slack for team communications
+#if ! app_is_installed "slack"; then brew_cask_install "slack"; fi

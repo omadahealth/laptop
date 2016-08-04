@@ -243,4 +243,4 @@ fancy_echo 'If you add any lines to your bash_profile, make sure they go above t
 
 # shellcheck source=/dev/null
 echo "reloading bash_profile"
-. "$HOME/.bash_profile"
+#. "$HOME/.bash_profile"

@@ -155,6 +155,10 @@ fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update
+
+# Install any existing packages in the Brewfile
+brew bundle
+
 brew bundle --file=- <<EOF
 tap "homebrew/services"
 tap "homebrew/versions"
@@ -170,7 +174,6 @@ brew "coreutils" #provides the GNU version of the stat command
 
 # Text editors
 brew "vim"
-
 
 # Programming languages
 brew "node"

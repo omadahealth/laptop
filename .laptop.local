@@ -61,4 +61,7 @@
 #if ! app_is_installed "slack"; then brew_cask_install "slack"; fi
 
 #Window manager
-#brew_cask_install "shiftit"
+#if app_is_installed "ShiftIt 2"; then echo "YUP"; fi
+
+#Jenkins monitoring tool
+#if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi

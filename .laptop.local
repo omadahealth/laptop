@@ -3,18 +3,52 @@
 #brew "phantomjs"
 #brew "watchman"
 #brew "gpg"
-
-# If you will be installing capybara-webkit, install the following
-#brew_cask_install "java"
-#brew "qt55"
-#brew link --force "qt55"
-#if ! app_is_installed 'Xcode'; then
-#  fancy_echo "You must install Xcode from the App Store before installing capybara-webkit"
-#fi
-
 #brew "optipng"
 #brew "jpegoptim"
 #brew "libxmlsec1"
 #brew "cmake"
 
 #brew_cask_install "rubymine"
+
+############# Capybara-Webkit ######################
+#brew_cask_install "java"
+#brew "qt55"
+#brew link --force "qt55"
+#if ! app_is_installed 'Xcode'; then
+#  fancy_echo "You must install Xcode from the App Store before installing capybara-webkit"
+#else
+    #gem_install_or_update "capybara-webkit"
+#fi
+###################################################
+
+############# Project Specific Installation #######
+#Replace project1, project2, etc with raw github content links to the project's installation script
+#Example: https://raw.githubusercontent.com/omadahealth/laptop/master/mac
+
+#declare -a PROJECTS=("project1" "project2" "project3")
+
+#for i in "${PROJECTS[@]}"
+#do
+#  curl -O "$i"
+#  less mac
+#  sh mac 2>&1 | tee ~/laptop.log
+#done
+###################################################
+
+############# RubyMine & IDE Prefs #######
+
+#brew_cask_install "rubymine"
+
+# You can install Pivotal's version
+#git clone https://github.com/pivotal/pivotal_ide_prefs
+# OR Omada's version
+# Warning: Check with your team members about which to use.
+# Omada's may not be able to be installed on new machines.
+#git clone https://github.com/omadahealth/pivotal_ide_prefs.git
+
+#cd pivotal_ide_prefs/cli
+#bin/ide_prefs --ide=rubymine install
+#bin/ide_prefs --ide=webstorm install
+#cd -
+
+###################################################

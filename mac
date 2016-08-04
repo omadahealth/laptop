@@ -16,23 +16,24 @@ fancy_echo() {
 
 append_to_bash_profile() {
   # shellcheck disable=SC2039
-  local text="$1" bash_profile
-  # shellcheck disable=SC2039
-  local skip_new_line="${2:-0}"
-
-  if [ -w "$HOME/.bash_profile.local" ]; then
-    bash_profile="$HOME/.bash_profile.local"
-  else
-    bash_profile="$HOME/.bash_profile"
-  fi
-
-  if ! grep -Fqs "$text" "$bash_profile"; then
-    if [ "$skip_new_line" -eq 1 ]; then
-      printf "%s\n" "$text" >> "$bash_profile"
-    else
-      printf "\n%s\n" "$text" >> "$bash_profile"
-    fi
-  fi
+  echo "$1"
+#  local text="$1" bash_profile
+#  # shellcheck disable=SC2039
+#  local skip_new_line="${2:-0}"
+#
+#  if [ -w "$HOME/.bash_profile.local" ]; then
+#    bash_profile="$HOME/.bash_profile.local"
+#  else
+#    bash_profile="$HOME/.bash_profile"
+#  fi
+#
+#  if ! grep -Fqs "$text" "$bash_profile"; then
+#    if [ "$skip_new_line" -eq 1 ]; then
+#      printf "%s\n" "$text" >> "$bash_profile"
+#    else
+#      printf "\n%s\n" "$text" >> "$bash_profile"
+#    fi
+#  fi
 }
 
 app_is_installed() {
@@ -47,15 +48,17 @@ brew_cask_install() {
     fancy_echo "$1 is already installed. Skipping..."
   else
     fancy_echo "Installing $1..."
-    brew cask install "$@"
+#    brew cask install "$@"
   fi
 }
 
 gem_install_or_update() {
   if gem list "$1" | grep "^$1 ("; then
-    gem update "$@"
+     echo "Updating gem $1"
+#    gem update "$@"
   else
-    gem install "$@"
+    echo "Installing gem $1"
+#    gem install "$@"
   fi
 }
 
@@ -63,13 +66,13 @@ brew_install_or_upgrade() {
   if brew_is_installed "$1"; then
     if brew_is_upgradable "$1"; then
       fancy_echo "Upgrading %s ..." "$1"
-      brew upgrade "$@"
+#      brew upgrade "$@"
     else
       fancy_echo "Already using the latest version of %s. Skipping ..." "$1"
     fi
   else
     fancy_echo "Installing %s ..." "$1"
-    brew install "$@"
+#    brew install "$@"
   fi
 }
 
@@ -88,7 +91,7 @@ brew_tap_is_installed() {
 brew_tap() {
   if ! brew_tap_is_installed "$1"; then
     fancy_echo "Tapping $1..."
-    brew tap "$1" 2> /dev/null
+#    brew tap "$1" 2> /dev/null
   fi
 }
 
@@ -121,7 +124,8 @@ fi
 ###################### Install Homebrew & Packages #############################################
 
 # shellcheck disable=SC2016
-append_to_bash_profile 'export PATH="$HOME/.bin:$PATH"'
+echo "Appending path with $HOME/.bin:$PATH"
+#append_to_bash_profile 'export PATH="$HOME/.bin:$PATH"'
 
 HOMEBREW_PREFIX="/usr/local"
 
@@ -143,14 +147,14 @@ if ! command -v brew >/dev/null; then
     append_to_bash_profile'# recommended by brew doctor'
 
     # shellcheck disable=SC2016
-    append_to_bash_profile 'export PATH="/usr/local/bin:$PATH"' 1
-
-    export PATH="/usr/local/bin:$PATH"
+#    append_to_bash_profile 'export PATH="/usr/local/bin:$PATH"' 1
+     echo "appending bash_profile with /usr/local/bin:$PATH"
+#    export PATH="/usr/local/bin:$PATH"
 fi
 
 if brew list | grep -Fq brew-cask; then
   fancy_echo "Uninstalling old Homebrew-Cask ..."
-  brew uninstall --force brew-cask
+#  brew uninstall --force brew-cask
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
@@ -158,38 +162,38 @@ brew update
 
 # Install any existing packages in the Brewfile
 brew bundle
+echo "running brew bundle"
+#brew bundle --file=- <<EOF
+#tap "homebrew/services"
+#tap "homebrew/versions"
+#
+#brew_tap 'caskroom/cask'
+#brew_install_or_upgrade 'brew-cask'
+#brew_tap 'caskroom/versions'
+#
+## Unix
+#brew_install_or_upgrade 'git'
+#brew "openssl"
+#brew "coreutils" #provides the GNU version of the stat command
+#
+## Text editors
+#brew "vim"
+#
+## Programming languages
+#brew "node"
+#brew "python"
+#
+## Image manipulation
+#brew "imagemagick"
+#
+## Databases
+#brew "postgres", restart_service: true
+#brew "redis", restart_service: true
+#
+## Elasticsearch
+#brew "elasticsearch", restart_services: true
 
-brew bundle --file=- <<EOF
-tap "homebrew/services"
-tap "homebrew/versions"
-
-brew_tap 'caskroom/cask'
-brew_install_or_upgrade 'brew-cask'
-brew_tap 'caskroom/versions'
-
-# Unix
-brew_install_or_upgrade 'git'
-brew "openssl"
-brew "coreutils" #provides the GNU version of the stat command
-
-# Text editors
-brew "vim"
-
-# Programming languages
-brew "node"
-brew "python"
-
-# Image manipulation
-brew "imagemagick"
-
-# Databases
-brew "postgres", restart_service: true
-brew "redis", restart_service: true
-
-# Elasticsearch
-brew "elasticsearch", restart_services: true
-
-EOF
+#EOF
 
 fancy_echo "Configuring Ruby ..."
 # If rbenv is present, use it.  If not use rvm
@@ -197,15 +201,15 @@ fancy_echo "Configuring Ruby ..."
 if ! command -v rbenv >/dev/null; then
   if ! command -v rvm >/dev/null; then
     fancy_echo 'Installing RVM and the latest Ruby...'
-    curl -L https://get.rvm.io | bash -s stable --ruby --auto-dotfiles --autolibs=enable
+#    curl -L https://get.rvm.io | bash -s stable --ruby --auto-dotfiles --autolibs=enable
     # shellcheck source=/dev/null
-    . "$HOME/.rvm/scripts/rvm"
+#    . "$HOME/.rvm/scripts/rvm"
   else
     local_version="$(rvm -v 2> /dev/null | awk '$2 != ""{print $2}')"
     latest_version="$(curl -s https://raw.githubusercontent.com/wayneeseguin/rvm/stable/VERSION)"
     if [ "$local_version" != "$latest_version" ]; then
       fancy_echo 'Upgrading RVM...'
-      rvm get stable --auto-dotfiles --autolibs=enable
+#      rvm get stable --auto-dotfiles --autolibs=enable
     else
       fancy_echo "Already using the latest version of RVM. Skipping..."
     fi
@@ -221,19 +225,21 @@ fancy_echo "Configuring Bundler ..."
   number_of_cores=$(sysctl -n hw.ncpu)
   bundle config --global jobs $((number_of_cores - 1))
 
-append_to_bash_profile "export PATH='/usr/local/opt/coreutils/libexec/gnubin:$PATH'"
-append_to_bash_profile "export MANPATH='/usr/local/opt/coreutils/libexec/gnuman:$MANPATH'"
+echo "appending bash_profile with coreutils"
+#append_to_bash_profile "export PATH='/usr/local/opt/coreutils/libexec/gnubin:$PATH'"
+#append_to_bash_profile "export MANPATH='/usr/local/opt/coreutils/libexec/gnuman:$MANPATH'"
 
 if [ -f "$HOME/.laptop.local" ]; then
   fancy_echo "Running your customizations from ~/.laptop.local ..."
   # shellcheck disable=SC1090
-  . "$HOME/.laptop.local"
+#  . "$HOME/.laptop.local"
 fi
 
 fancy_echo 'Appending bash_profile to load RVM into a shell session as a function.'
 fancy_echo 'If you add any lines to your bash_profile, make sure they go above the RVM line'
-append_to_bash_profile '# Add all other lines above this.  RVM must be last.'
-append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*'
+#append_to_bash_profile '# Add all other lines above this.  RVM must be last.'
+#append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*'
 
 # shellcheck source=/dev/null
+echo "reloading bash_profile"
 . "$HOME/.bash_profile"

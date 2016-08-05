@@ -156,12 +156,8 @@ fi
 fancy_echo "Updating Homebrew formulae ..."
 brew update
 
-# Install any existing packages in the Brewfile
-brew bundle
-
-brew bundle --file=- <<EOF
-tap "homebrew/services"
-tap "homebrew/versions"
+brew_tap "homebrew/services"
+brew_tap "homebrew/versions"
 
 brew_tap 'caskroom/cask'
 brew_install_or_upgrade 'brew-cask'
@@ -169,27 +165,25 @@ brew_tap 'caskroom/versions'
 
 # Unix
 brew_install_or_upgrade 'git'
-brew "openssl"
-brew "coreutils" #provides the GNU version of the stat command
+brew_install_or_upgrade "openssl"
+brew_install_or_upgrade "coreutils" #provides the GNU version of the stat command
 
 # Text editors
-brew "vim"
+brew_install_or_upgrade "vim"
 
 # Programming languages
-brew "node"
-brew "python"
+brew_install_or_upgrade "node"
+brew_install_or_upgrade "python"
 
 # Image manipulation
-brew "imagemagick"
+brew_install_or_upgrade "imagemagick"
 
 # Databases
-brew "postgres", restart_service: true
-brew "redis", restart_service: true
+brew_install_or_upgrade "postgres", restart_service: true
+brew_install_or_upgrade "redis", restart_service: true
 
 # Elasticsearch
-brew "elasticsearch", restart_services: true
-
-EOF
+brew_install_or_upgrade "elasticsearch", restart_services: true
 
 fancy_echo "Configuring Ruby ..."
 # If rbenv is present, use it.  If not use rvm

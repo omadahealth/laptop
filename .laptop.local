@@ -30,7 +30,6 @@
 #for i in "${PROJECTS[@]}"
 #do
 #  curl -O "$i"
-#  less mac
 #  sh mac 2>&1 | tee ~/laptop.log
 #done
 ###################################################

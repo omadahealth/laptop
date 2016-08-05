@@ -7,23 +7,11 @@ It can be run multiple times on the same machine safely.
 It installs, upgrades, or skips packages
 based on what is already installed on the machine.
 
-Requirements
-------------
-
-We support:
-
-* OS X Mavericks (10.9)
-* OS X Yosemite (10.10)
-* OS X El Capitan (10.11)
-
-Older versions may work but aren't regularly tested. Bug reports for older
-versions are welcome.
-
 Pre-installation steps
 ----------------------
 
 This script assumes you have gone through the steps outlined in the
-[engineering onboarding][https://wiki.omadahealth.net/doku.php?id=engineering:onboarding] wiki
+[engineering onboarding](https://wiki.omadahealth.net/doku.php?id=engineering:onboarding) wiki
 and have set up your Github profile with your ssh keys before running.
 
 Install

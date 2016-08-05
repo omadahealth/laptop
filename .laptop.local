@@ -1,18 +1,18 @@
 #!/bin/sh
 
-#brew "phantomjs"
-#brew "watchman"
-#brew "gpg"
-#brew "optipng"
-#brew "jpegoptim"
-#brew "libxmlsec1"
-#brew "cmake"
+#brew_install_or_upgrade "phantomjs"
+#brew_install_or_upgrade "watchman"
+#brew_install_or_upgrade "gpg"
+#brew_install_or_upgrade "optipng"
+#brew_install_or_upgrade "jpegoptim"
+#brew_install_or_upgrade "libxmlsec1"
+#brew_install_or_upgrade "cmake"
 
 #brew_cask_install "rubymine"
 
 ############# Capybara-Webkit ######################
 #brew_cask_install "java"
-#brew "qt55"
+#brew_install_or_upgrade "qt55"
 #brew link --force "qt55"
 #if ! app_is_installed 'Xcode'; then
 #  fancy_echo "You must install Xcode from the App Store before installing capybara-webkit"

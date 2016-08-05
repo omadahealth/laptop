@@ -178,11 +178,11 @@ brew_install_or_upgrade "python"
 brew_install_or_upgrade "imagemagick"
 
 # Databases
-brew_install_or_upgrade "postgresql", restart_service: true
-brew_install_or_upgrade "redis", restart_service: true
+brew_install_or_upgrade "postgresql"
+brew_install_or_upgrade "redis"
 
 # Elasticsearch
-brew_install_or_upgrade "elasticsearch", restart_services: true
+brew_install_or_upgrade "elasticsearch"
 
 fancy_echo "Configuring Ruby ..."
 # If rbenv is present, use it.  If not use rvm

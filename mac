@@ -234,6 +234,3 @@ fancy_echo 'Appending bash_profile to load RVM into a shell session as a functio
 fancy_echo 'If you add any lines to your bash_profile, make sure they go above the RVM line'
 append_to_bash_profile '# Add all other lines above this.  RVM must be last.'
 append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*'
-
-# shellcheck source=/dev/null
-. "$HOME/.bash_profile"

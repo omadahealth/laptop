@@ -179,10 +179,13 @@ brew_install_or_upgrade "imagemagick"
 
 # Databases
 brew_install_or_upgrade "postgresql"
+fancy_echo "If postgresql was installed, you will need to run 'brew services start postgresql' to start it."
 brew_install_or_upgrade "redis"
+fancy_echo "If redis was installed, you will need to run 'brew services start redis' to start it."
 
 # Elasticsearch
 brew_install_or_upgrade "elasticsearch"
+fancy_echo "If elasticsearch was installed, you will need to run 'brew services start elasticsearch' to start it."
 
 fancy_echo "Configuring Ruby ..."
 # If rbenv is present, use it.  If not use rvm
@@ -226,4 +229,4 @@ fi
 fancy_echo 'Appending bash_profile to load RVM into a shell session as a function.'
 fancy_echo 'If you add any lines to your bash_profile, make sure they go above the RVM line'
 append_to_bash_profile '# Add all other lines above this.  RVM must be last.'
-append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*'
+append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm'" # Load RVM into a shell session *as a function*'

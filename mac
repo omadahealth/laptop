@@ -77,6 +77,10 @@ brew_is_installed() {
   brew list -1 | grep -Fqx "$1"
 }
 
+brew_cask_is_installed() {
+  brew cask list -1 | grep -Fqx "$1"
+}
+
 brew_is_upgradable() {
   ! brew outdated --quiet "$1" >/dev/null
 }

@@ -184,6 +184,7 @@ brew_install_or_upgrade "redis"
 fancy_echo "If redis was installed, you will need to run 'brew services start redis' to start it."
 
 # Elasticsearch
+brew_cask_install "java"
 brew_install_or_upgrade "elasticsearch"
 fancy_echo "If elasticsearch was installed, you will need to run 'brew services start elasticsearch' to start it."
 

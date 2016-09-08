@@ -23,16 +23,17 @@ fi
 
 ############ Project Specific Installation #######
 #Replace project1, project2, etc with raw github content links to the project's installation script
-#Example: https://raw.githubusercontent.com/omadahealth/laptop/master/mac
+#Example: https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.orange.local
 
 # shellcheck disable=SC2039
-#declare -a PROJECTS=("project1" "project2" "project3")
+#declare -a PROJECTS=("orange" "green" "blue" "red")
 
 ## shellcheck disable=SC2039
 #for i in "${PROJECTS[@]}"
 #do
-  #curl -O "$i"
-  #sh mac 2>&1 | tee ~/laptop.log
+  #fancy_echo "Installing $1"
+  #curl -O "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
+  #sh .$1.local 2>&1 | tee ~/laptop.log
 #done
 ###################################################
 

@@ -14,6 +14,28 @@ fancy_echo() {
   printf "\n$fmt\n" "$@"
 }
 
+conditional_exit() {
+  fancy_echo "$1"
+  # shellcheck disable=SC2039
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes ) fancy_echo "Wonderful! Moving on..."; break;;
+      No ) fancy_echo "Bummer, you must complete that before continuing with this script.\n$2\nGoodbye";exit;;
+    esac
+  done
+}
+
+conditional_installation() {
+  fancy_echo "$1"
+  # shellcheck disable=SC2039
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes ) $2; break;;
+      No ) "Great, moving on..."; break;;
+    esac
+  done
+}
+
 append_to_bash_profile() {
   # shellcheck disable=SC2039
   local text="$1" bash_profile
@@ -33,6 +55,10 @@ append_to_bash_profile() {
       printf "\n%s\n" "$text" >> "$bash_profile"
     fi
   fi
+}
+
+git_clone() {
+  git clone "$1"
 }
 
 app_is_installed() {
@@ -95,6 +121,11 @@ brew_tap() {
     brew tap "$1" 2> /dev/null
   fi
 }
+################################ Check for installation requirements ############################
+fancy_echo "Welcome to Omada Health!\nWe have a few questions to ask before we get started."
+
+conditional_exit "Have you set up your ssh keys with helpdesk and platform?", "Please read the engineering onboarding wiki for more instructions:\nhttps://wiki.omadahealth.net/doku.php?id=engineering:onboarding"
+conditional_exit "Do you have access to Omada's Github?", "Please read the engineering onboarding wiki or speak to your manager for more instructions:\nhttps://wiki.omadahealth.net/doku.php?id=engineering:onboarding"
 
 ################################ Create some folders ############################################
 
@@ -231,7 +262,7 @@ if [ -f "$HOME/.laptop.local" ]; then
   . "$HOME/.laptop.local"
 fi
 
-fancy_echo 'Appending bash_profile to load RVM into a shell session as a function.'
-fancy_echo 'If you add any lines to your bash_profile, make sure they go above the RVM line'
-append_to_bash_profile '# Add all other lines above this.  RVM must be last.'
-append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm'" # Load RVM into a shell session *as a function*'
+#fancy_echo 'Appending bash_profile to load RVM into a shell session as a function.'
+#fancy_echo 'If you add any lines to your bash_profile, make sure they go above the RVM line'
+#append_to_bash_profile '# Add all other lines above this.  RVM must be last.'
+#append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm'" # Load RVM into a shell session *as a function*'

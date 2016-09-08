@@ -1,29 +1,6 @@
-#!/bin/sh
-
-#brew_install_or_upgrade "phantomjs"
-#brew_install_or_upgrade "watchman"
-#brew_install_or_upgrade "gpg"
-#brew_install_or_upgrade "optipng"
-#brew_install_or_upgrade "jpegoptim"
-#brew_install_or_upgrade "libxmlsec1"
-#brew_install_or_upgrade "cmake"
-
-#brew_cask_install "rubymine"
-
-############# Capybara-Webkit ######################
-#brew_cask_install "java"
-#brew_install_or_upgrade "qt55"
-#brew link --force "qt55"
-#if ! app_is_installed 'Xcode'; then
-#  fancy_echo "You must install Xcode from the App Store before installing capybara-webkit"
-#else
-    #gem_install_or_update "capybara-webkit"
-#fi
-###################################################
-
 ############# Project Specific Installation #######
 #Replace project1, project2, etc with raw github content links to the project's installation script
-#Example: https://raw.githubusercontent.com/omadahealth/laptop/master/mac
+#Example: https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.orange.local
 
 #declare -a PROJECTS=("project1" "project2" "project3")
 
@@ -34,33 +11,5 @@
 #done
 ###################################################
 
-############# RubyMine & IDE Prefs #######
-
-#brew_cask_install "rubymine"
-
-# You can install Pivotal's version
-#git clone https://github.com/pivotal/pivotal_ide_prefs
-# OR Omada's version
-# Warning: Check with your team members about which to use.
-# Omada's may not be able to be installed on new machines.
-#git clone https://github.com/omadahealth/pivotal_ide_prefs.git
-
-#cd pivotal_ide_prefs/cli
-#bin/ide_prefs --ide=rubymine install
-#bin/ide_prefs --ide=webstorm install
-#cd -
-
-###################################################
-
-# Optional Applications
-#Lastpass for password management
-#if ! app_is_installed "lastpass"; then brew_cask_install "lastpass"; fi
-
-#Slack for team communications
-#if ! app_is_installed "slack"; then brew_cask_install "slack"; fi
-
-#Window manager
-#if app_is_installed "ShiftIt 2"; then echo "YUP"; fi
-
-#Jenkins monitoring tool
-#if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi
+##################################################
+#If you have customizations that you want to make that aren't hosted on github, add them below.

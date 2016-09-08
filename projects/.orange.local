@@ -1,0 +1,52 @@
+#!/bin/sh
+
+brew_install_or_upgrade "phantomjs"
+brew_install_or_upgrade "watchman"
+brew_install_or_upgrade "gpg"
+brew_install_or_upgrade "optipng"
+brew_install_or_upgrade "jpegoptim"
+brew_install_or_upgrade "libxmlsec1"
+brew_install_or_upgrade "cmake"
+
+brew_cask_install "rubymine"
+
+############# Capybara-Webkit ######################
+brew_cask_install "java"
+brew_install_or_upgrade "qt55"
+brew link --force "qt55"
+if ! app_is_installed 'Xcode'; then
+   #conditional_exit "Have you installed the full version of Xcode?\n(Not just command line tools)" "Capybara-webkit requires this to be installed.\nPlease install and re-run this script."
+else
+   #gem_install_or_update "capybara-webkit"
+fi
+##################################################
+
+############# RubyMine & IDE Prefs #######
+
+brew_cask_install "rubymine"
+
+#You can install Pivotal's version
+fancy_echo "Next up, we'll install IDE prefs..."
+fancy_echo "If you don't know which IDE prefs to choose (Pivotal vs Omada's), ask your teammates before installing"
+conditional_installation "Do you want to install Pivotal's RubyMine prefs?" git_clone("https://github.com/pivotal/pivotal_ide_prefs")
+conditional_installation "Do you want to install Omada's RubyMine prefs?"  git_clone("https://github.com/omadahealth/pivotal_ide_prefs.git")
+
+#cd pivotal_ide_prefs/cli
+#bin/ide_prefs --ide=rubymine install
+#bin/ide_prefs --ide=webstorm install
+#cd -
+
+###################################################
+
+# Optional Applications
+#Lastpass for password management
+#if ! app_is_installed "lastpass"; then brew_cask_install "lastpass"; fi
+
+#Slack for team communications
+#if ! app_is_installed "slack"; then brew_cask_install "slack"; fi
+
+#Window manager
+#if app_is_installed "ShiftIt 2"; then echo "YUP"; fi
+
+#Jenkins monitoring tool
+#if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi

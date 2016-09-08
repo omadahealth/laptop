@@ -59,7 +59,7 @@ conditional_installation() {
   select yn in "Yes" "No"; do
     case $yn in
       Yes ) $2; break;;
-      No ) "Great, moving on..."; break;;
+      No ) fancy_echo "Great, moving on..."; break;;
     esac
   done
 }

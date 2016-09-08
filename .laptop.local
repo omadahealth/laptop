@@ -1,64 +1,69 @@
 #!/bin/sh
 
-#brew_install_or_upgrade "phantomjs"
-#brew_install_or_upgrade "watchman"
-#brew_install_or_upgrade "gpg"
-#brew_install_or_upgrade "optipng"
-#brew_install_or_upgrade "jpegoptim"
-#brew_install_or_upgrade "libxmlsec1"
-#brew_install_or_upgrade "cmake"
+brew_install_or_upgrade "phantomjs"
+brew_install_or_upgrade "watchman"
+brew_install_or_upgrade "gpg"
+brew_install_or_upgrade "optipng"
+brew_install_or_upgrade "jpegoptim"
+brew_install_or_upgrade "libxmlsec1"
+brew_install_or_upgrade "cmake"
 
-#brew_cask_install "rubymine"
+brew_cask_install "rubymine"
 
-############# Capybara-Webkit ######################
-#brew_cask_install "java"
-#brew_install_or_upgrade "qt55"
-#brew link --force "qt55"
-#if ! app_is_installed 'Xcode'; then
-#  fancy_echo "You must install Xcode from the App Store before installing capybara-webkit"
-#else
-    #gem_install_or_update "capybara-webkit"
-#fi
-###################################################
+############ Capybara-Webkit ######################
+brew_cask_install "java"
+brew_install_or_upgrade "qt55"
+brew link --force "qt55"
+if ! app_is_installed 'Xcode'; then
+  fancy_echo "You must install Xcode from the App Store before installing capybara-webkit"
+else
+    gem_install_or_update "capybara-webkit"
+fi
+##################################################
 
-############# Project Specific Installation #######
+############ Project Specific Installation #######
 #Replace project1, project2, etc with raw github content links to the project's installation script
 #Example: https://raw.githubusercontent.com/omadahealth/laptop/master/mac
 
+# shellcheck disable=SC2039
 #declare -a PROJECTS=("project1" "project2" "project3")
 
+## shellcheck disable=SC2039
 #for i in "${PROJECTS[@]}"
 #do
-#  curl -O "$i"
-#  sh mac 2>&1 | tee ~/laptop.log
+  #curl -O "$i"
+  #sh mac 2>&1 | tee ~/laptop.log
 #done
 ###################################################
 
 ############# RubyMine & IDE Prefs #######
 
-#brew_cask_install "rubymine"
+brew_cask_install "rubymine"
 
-#fancy_echo "Next up, we'll install IDE prefs..."
-#fancy_echo "If you don't know which IDE prefs to choose (Pivotal vs Omada's), ask your teammates before installing"
-#conditional_installation "Do you want to install Pivotal's RubyMine prefs?" git_clone("https://github.com/pivotal/pivotal_ide_prefs")
-#conditional_installation "Do you want to install Omada's RubyMine prefs?"  git_clone("https://github.com/omadahealth/pivotal_ide_prefs.git")
+if [ ! -d "$HOME/workspace/pivotal_ide_prefs/cli" ]; then
+  (
+    fancy_echo "Next up, we'll install IDE prefs..."
+    fancy_echo "If you don't know which IDE prefs to choose (Pivotal vs Omada's), ask your teammates before installing"
+    conditional_installation "Do you want to install Pivotal's RubyMine prefs?" git clone "https://github.com/pivotal/pivotal_ide_prefs" "$HOME/workspace"
+    conditional_installation "Do you want to install Omada's RubyMine prefs?"  git clone "https://github.com/omadahealth/pivotal_ide_prefs.git" "$HOME/workspace"
+    # shellcheck disable=SC2164
+    cd pivotal_ide_prefs/cli
+    bin/ide_prefs --ide=rubymine install
+    bin/ide_prefs --ide=webstorm install
+  )
+fi
 
-#cd pivotal_ide_prefs/cli
-#bin/ide_prefs --ide=rubymine install
-#bin/ide_prefs --ide=webstorm install
-#cd -
-
-###################################################
+##################################################
 
 # Optional Applications
 #Lastpass for password management
-#if ! app_is_installed "lastpass"; then brew_cask_install "lastpass"; fi
+if ! app_is_installed "lastpass"; then brew_cask_install "lastpass"; fi
 
 #Slack for team communications
-#if ! app_is_installed "slack"; then brew_cask_install "slack"; fi
+if ! app_is_installed "slack"; then brew_cask_install "slack"; fi
 
 #Window manager
-#if ! app_is_installed "ShiftIt 2"; then fancy_echo "Please go here to install Shiftit 2:\nhttps://github.com/fikovnik/ShiftIt/releases"; fi
+if ! app_is_installed "ShiftIt 2"; then fancy_echo "Please go here to install Shiftit 2:\nhttps://github.com/fikovnik/ShiftIt/releases"; fi
 
 #Jenkins monitoring tool
-#if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi
+if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi

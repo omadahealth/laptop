@@ -42,6 +42,28 @@ app_is_installed() {
   find /Applications -iname "$app_name*" -maxdepth 1 | egrep '.*' > /dev/null
 }
 
+conditional_exit() {
+  fancy_echo "$1"
+  # shellcheck disable=SC2039
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes ) fancy_echo "Wonderful! Moving on..."; break;;
+      No ) fancy_echo "Bummer, you must complete that before continuing with this script.\n$2\nGoodbye";exit;;
+    esac
+  done
+}
+
+conditional_installation() {
+  fancy_echo "$1"
+  # shellcheck disable=SC2039
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes ) $2; break;;
+      No ) "Great, moving on..."; break;;
+    esac
+  done
+}
+
 brew_cask_install() {
   if app_is_installed "$1" || brew_cask_is_installed "$1"; then
     fancy_echo "$1 is already installed. Skipping..."
@@ -95,6 +117,11 @@ brew_tap() {
     brew tap "$1" 2> /dev/null
   fi
 }
+
+################################ Check for installation requirements ############################
+  fancy_echo "Welcome to Omada Health!\nWe have a few questions to ask before we get started."
+  conditional_exit "Have you set up your ssh keys with helpdesk and platform?", "Please read the engineering onboarding wiki for more instructions:\nhttps://wiki.omadahealth.net/doku.php?id=engineering:onboarding"
+  conditional_exit "Do you have access to Omada's Github?", "Please read the engineering onboarding wiki or speak to your manager for more instructions:\nhttps://wiki.omadahealth.net/doku.php?id=engineering:onboarding"
 
 ################################ Create some folders ############################################
 

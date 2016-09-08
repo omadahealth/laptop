@@ -38,12 +38,10 @@
 
 #brew_cask_install "rubymine"
 
-# You can install Pivotal's version
-#git clone https://github.com/pivotal/pivotal_ide_prefs
-# OR Omada's version
-# Warning: Check with your team members about which to use.
-# Omada's may not be able to be installed on new machines.
-#git clone https://github.com/omadahealth/pivotal_ide_prefs.git
+#fancy_echo "Next up, we'll install IDE prefs..."
+#fancy_echo "If you don't know which IDE prefs to choose (Pivotal vs Omada's), ask your teammates before installing"
+#conditional_installation "Do you want to install Pivotal's RubyMine prefs?" git_clone("https://github.com/pivotal/pivotal_ide_prefs")
+#conditional_installation "Do you want to install Omada's RubyMine prefs?"  git_clone("https://github.com/omadahealth/pivotal_ide_prefs.git")
 
 #cd pivotal_ide_prefs/cli
 #bin/ide_prefs --ide=rubymine install
@@ -60,7 +58,7 @@
 #if ! app_is_installed "slack"; then brew_cask_install "slack"; fi
 
 #Window manager
-#if app_is_installed "ShiftIt 2"; then echo "YUP"; fi
+#if ! app_is_installed "ShiftIt 2"; then fancy_echo "Please go here to install Shiftit 2:\nhttps://github.com/fikovnik/ShiftIt/releases"; fi
 
 #Jenkins monitoring tool
 #if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi

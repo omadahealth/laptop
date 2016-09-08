@@ -8,8 +8,6 @@ brew_install_or_upgrade "jpegoptim"
 brew_install_or_upgrade "libxmlsec1"
 brew_install_or_upgrade "cmake"
 
-brew_cask_install "rubymine"
-
 ############ Capybara-Webkit ######################
 brew_cask_install "java"
 brew_install_or_upgrade "qt55"
@@ -26,15 +24,15 @@ fi
 #Example: https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.orange.local
 
 # shellcheck disable=SC2039
-#declare -a PROJECTS=("orange" "green" "blue" "red")
+declare -a PROJECTS=("orange" "green" "blue" "red")
 
-## shellcheck disable=SC2039
-#for i in "${PROJECTS[@]}"
-#do
-  #fancy_echo "Installing $1"
-  #curl -O "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
-  #sh .$1.local 2>&1 | tee ~/laptop.log
-#done
+# shellcheck disable=SC2039
+for i in "${PROJECTS[@]}"
+do
+  fancy_echo "Installing $1"
+  curl -O "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
+  sh ".$1.local" 2>&1 | tee ~/laptop.log
+done
 ###################################################
 
 ############# RubyMine & IDE Prefs #######

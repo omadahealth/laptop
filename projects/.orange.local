@@ -24,16 +24,16 @@ fi
 
 # Optional Applications
 #Lastpass for password management
-if ! app_is_installed "lastpass"; then brew_cask_install "lastpass"; fi
+conditional_installation "Do you want to install LastPass?" brew_cask_install "lastpass"
 
 #Slack for team communications
-if ! app_is_installed "slack"; then brew_cask_install "slack"; fi
+conditional_installation "Do you want to install Slack?" brew_cask_install "slack"
 
 #Window manager
 if ! app_is_installed "ShiftIt 2"; then fancy_echo "Please go here to install Shiftit 2:\nhttps://github.com/fikovnik/ShiftIt/releases"; fi
 
 #Jenkins monitoring tool
-if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi
+conditional_installation "Do you want to install CCMenu (for Jenkins monitoring)?" brew_cask_install "ccmenu"
 
 fancy_echo "Setting up database"
 
@@ -41,8 +41,8 @@ fancy_echo "Setting up database"
   if [ ! -d "$HOME/workspace/orange" ]; then
     git clone git@github.com:omadahealth/orange.git "$HOME/workspace"
   fi
-  rvm install `cat orange/.ruby-version`
   cd "$HOME/workspace/orange"
+  rvm install `cat .ruby-version`
   bundle
   rake db:create db:schema:load db:test:prepare db:seed
   cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys

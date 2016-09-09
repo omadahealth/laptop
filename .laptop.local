@@ -27,9 +27,11 @@ if [ ! -d "$HOME/workspace/pivotal_ide_prefs/cli" ]; then
     conditional_installation "Do you want to install Pivotal's RubyMine prefs?" git clone "https://github.com/pivotal/pivotal_ide_prefs" "$HOME/workspace"
     conditional_installation "Do you want to install Omada's RubyMine prefs?"  git clone "https://github.com/omadahealth/pivotal_ide_prefs.git" "$HOME/workspace"
     # shellcheck disable=SC2164
-    cd pivotal_ide_prefs/cli
-    bin/ide_prefs --ide=rubymine install
-    bin/ide_prefs --ide=webstorm install
+    if [ -d "$HOME/workspace/pivotal_ide_prefs/cli" ]; then
+      cd pivotal_ide_prefs/cli
+      bin/ide_prefs --ide=rubymine install
+      bin/ide_prefs --ide=webstorm install
+    fi
   )
 fi
 

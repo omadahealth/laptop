@@ -9,6 +9,7 @@ brew_install_or_upgrade "optipng"
 brew_install_or_upgrade "jpegoptim"
 brew_install_or_upgrade "libxmlsec1"
 brew_install_or_upgrade "cmake"
+brew_install_or_upgrade "postgis"
 
 ############ Capybara-Webkit ######################
 brew_cask_install "java"
@@ -34,5 +35,24 @@ if ! app_is_installed "ShiftIt 2"; then fancy_echo "Please go here to install Sh
 #Jenkins monitoring tool
 if ! app_is_installed "CCMenu"; then brew_cask_install "ccmenu"; fi
 
-fancy_echo "Orange installation complete."
+fancy_echo "Setting up database"
 
+(
+  if [ ! -d "$HOME/workspace/orange" ]; then
+    git clone git@github.com:omadahealth/orange.git "$HOME/workspace"
+  fi
+  rvm install `cat orange/.ruby-version`
+  cd "$HOME/workspace/orange"
+  bundle
+  rake db:create db:schema:load db:test:prepare db:seed
+  cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
+  fancy_echo "Don't forget to grab the orange_secrets from OwnCloud."
+  append_to_bash_profile "[[ -s "$HOME/.orange_secrets" ]] && source "$HOME/.orange_secrets" # Load .orange_secrets for populating orange secrets.yml"
+  conditional_installation "Do you want to load a trimmed production snapshot?" rake db:download_and_import[production_trimmed]
+  fancy_echo "Setting up Orange dashboard"
+  cd "$HOME/workspace/orange/dashboard"
+  npm install
+)
+
+fancy_echo "Orange installation complete."
+fancy_echo "♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪"

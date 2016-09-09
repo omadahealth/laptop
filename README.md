@@ -22,7 +22,7 @@ Download, review, then execute the script:
 ```sh
 curl -o ~/mac --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/mac
 less ~/mac
-sh ~/mac 2>&1 | tee ~/laptop.log
+sudo sh ~/mac 2>&1 | tee ~/laptop.log
 ```
 
 Once the script is done, it's a good idea to quit and relaunch Terminal.

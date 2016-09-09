@@ -11,6 +11,9 @@ brew_install_or_upgrade "libxmlsec1"
 brew_install_or_upgrade "cmake"
 brew_install_or_upgrade "postgis"
 
+curl -o ~/get-pip.py --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/mac
+sudo pip install pyx12
+
 ############ Capybara-Webkit ######################
 brew_cask_install "java"
 brew_install_or_upgrade "qt55"

@@ -14,6 +14,8 @@ This script assumes you have gone through the steps outlined in the
 [engineering onboarding](https://wiki.omadahealth.net/doku.php?id=engineering:onboarding) wiki
 and have set up your Github profile with your ssh keys before running.
 
+You will need *sudo* permissions to run this script.
+
 Install
 -------
 

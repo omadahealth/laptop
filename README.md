@@ -20,7 +20,7 @@ Install
 Download, review, then execute the script:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/mac
+curl -o ~/mac --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/mac
 less mac
 sh mac 2>&1 | tee ~/laptop.log
 ```
@@ -108,7 +108,7 @@ This repo already contains a .laptop.local you can use to get started.
 Either grab it from the repo or you can download it to your home directory using the command below.
 
 ```sh
-curl -o "$HOME/" --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
+curl -o ~/mac --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
 ```
 
 Optional tools currently in `laptop.local`
@@ -129,12 +129,10 @@ For example:
 ```sh
 #!/bin/sh
 
-brew bundle --file=- <<EOF
-brew "Caskroom/cask/dockertoolbox"
-brew "go"
-brew "ngrok"
-brew "watch"
-EOF
+brew_cask_install_or_upgrade "dockertoolbox"
+brew_install_or_upgrade "go"
+brew_install_or_upgrade "ngrok"
+brew_install_or_upgrade "watch"
 
 default_docker_machine() {
   docker-machine ls | grep -Fq "default"

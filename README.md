@@ -85,13 +85,31 @@ Databases:
 
 It should take less than 15 minutes to install (depends on your machine).
 
+Customize your team's setup in the project specific files
+------------------------------
+
+There are project specific files in the `/projects` folder.
+
+If you want to share setup commands between your whole team, add them in there and create a pull request to update them in the repo.
+
+The team files are pulled in when running the laptop.local script.
+
+You can declare which teams' files you'd like to include by updating this line:
+`declare -a PROJECTS=("orange" "green" "blue" "red")`
+
+When naming new team files, please keep to the style of `teamname.local`.
+
 Customize in `~/.laptop.local`
 ------------------------------
 
 Your ~/.laptop.local is run at the end of the mac script.
-Put your customizations there.
+Put your personal customizations there.
 This repo already contains a .laptop.local you can use to get started.
-(If you decide to use the example, copy/move it to your home directory)
+Either grab it from the repo or you can download it to your home directory using the command below.
+
+```sh
+curl --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
+```
 
 Optional tools currently in `laptop.local`
 If you want to install these, uncomment them from the `laptop.local` file.

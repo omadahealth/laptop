@@ -252,12 +252,6 @@ fancy_echo "Configuring Bundler ..."
 append_to_bash_profile "export PATH='/usr/local/opt/coreutils/libexec/gnubin:$PATH'"
 append_to_bash_profile "export MANPATH='/usr/local/opt/coreutils/libexec/gnuman:$MANPATH'"
 
-if [ -f "$HOME/.laptop.local" ]; then
-  fancy_echo "Running your customizations from ~/.laptop.local ..."
-  # shellcheck disable=SC1090
-  . "$HOME/.laptop.local"
-fi
-
 fancy_echo 'Appending bash_profile to load RVM into a shell session as a function.'
 fancy_echo 'If you add any lines to your bash_profile, make sure they go above the RVM line'
 append_to_bash_profile '# Add all other lines above this.  RVM must be last.'
@@ -265,7 +259,18 @@ append_to_bash_profile "[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/
 
 fancy_echo "Reloading bash profile"
 # shellcheck disable=SC1090
-. "$HOME/.bash_profile"
+# shellcheck disable=SC2039
+source "$HOME/.bash_profile"
 
+
+if [ -f "$HOME/.laptop.local" ]; then
+  fancy_echo "Running your customizations from ~/.laptop.local ..."
+  # shellcheck disable=SC1090
+  . "$HOME/.laptop.local"
+fi
+
+# shellcheck disable=SC1090
+# shellcheck disable=SC2039
+source "$HOME/.bash_profile"
 
 fancy_echo "You're done!\nWelcome again to Omada Health."

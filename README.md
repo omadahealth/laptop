@@ -108,7 +108,7 @@ This repo already contains a .laptop.local you can use to get started.
 Either grab it from the repo or you can download it to your home directory using the command below.
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
+curl -o "$HOME/" --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
 ```
 
 Optional tools currently in `laptop.local`

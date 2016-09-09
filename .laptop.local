@@ -10,9 +10,9 @@ declare -a PROJECTS=("orange" "green" "blue" "red")
 # shellcheck disable=SC2039
 for i in "${PROJECTS[@]}"
 do
-  fancy_echo "Installing $1"
+  fancy_echo "Installing $i"
   curl -O "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
-  sh ".$1.local" 2>&1 | tee ~/laptop.log
+  sh ".$i.local" 2>&1 | tee ~/laptop.log
 done
 ###################################################
 

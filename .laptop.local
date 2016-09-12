@@ -11,7 +11,9 @@ declare -a PROJECTS=("orange" "green" "blue" "red")
 for i in "${PROJECTS[@]}"
 do
   fancy_echo "Installing $i"
-  curl -o "$HOME/.$i.local" --remote-name "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
+  if [ ! -d "$HOME/.$i.local" ]; then
+    curl -o "$HOME/.$i.local" --remote-name "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
+  fi
   # shellcheck disable=SC1090
   . "$HOME/.$i.local"
 done

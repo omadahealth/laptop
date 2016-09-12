@@ -41,22 +41,23 @@ conditional_installation "Do you want to install CCMenu (for Jenkins monitoring)
 
 fancy_echo "Setting up database"
 
-(
-  if [ ! -d "$HOME/workspace/orange" ]; then
-    git clone git@github.com:omadahealth/orange.git "$HOME/workspace"
-  fi
-  cd "$HOME/workspace/orange"
-  rvm install `cat .ruby-version`
-  bundle
-  rake db:create db:schema:load db:test:prepare db:seed
-  cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
-  fancy_echo "Don't forget to grab the orange_secrets from OwnCloud."
-  append_to_bash_profile "[[ -s "$HOME/.orange_secrets" ]] && source "$HOME/.orange_secrets" # Load .orange_secrets for populating orange secrets.yml"
-  conditional_installation "Do you want to load a trimmed production snapshot?" rake db:download_and_import[production_trimmed]
-  fancy_echo "Setting up Orange dashboard"
-  cd "$HOME/workspace/orange/dashboard"
-  npm install
-)
+if [ ! -d "$HOME/workspace/orange" ]; then
+  git clone git@github.com:omadahealth/orange.git "$HOME/workspace/orange"
+fi
+cd "$HOME/workspace/orange" ||
+# shellcheck disable=SC2046
+rvm install `cat .ruby-version`
+bundle
+rake db:create db:schema:load db:test:prepare db:seed
+cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
+fancy_echo "Don't forget to grab the orange_secrets from OwnCloud."
+append_to_bash_profile "[[ -s "$HOME/.orange_secrets" ]] && source "$HOME/.orange_secrets" # Load .orange_secrets for populating orange secrets.yml"
+
+conditional_installation "Do you want to load a trimmed production snapshot?" rake db:download_and_import[production_trimmed]
+fancy_echo "Setting up Orange dashboard"
+cd "$HOME/workspace/orange/dashboard" ||
+npm install
+cd - ||
 
 fancy_echo "Orange installation complete."
 fancy_echo "♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪"

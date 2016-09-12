@@ -250,8 +250,10 @@ fancy_echo "Configuring Bundler ..."
   number_of_cores=$(sysctl -n hw.ncpu)
   bundle config --global jobs $((number_of_cores - 1))
 
-append_to_bash_profile "export PATH='/usr/local/opt/coreutils/libexec/gnubin:$PATH'"
-append_to_bash_profile "export MANPATH='/usr/local/opt/coreutils/libexec/gnuman:$MANPATH'"
+# shellcheck disable=2016
+append_to_bash_profile 'export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"'
+# shellcheck disable=2016
+append_to_bash_profile 'export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"'
 
 fancy_echo 'Appending bash_profile to load RVM into a shell session as a function.'
 fancy_echo 'If you add any lines to your bash_profile, make sure they go above the RVM line'

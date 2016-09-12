@@ -11,7 +11,7 @@ declare -a PROJECTS=("orange" "green" "blue" "red")
 for i in "${PROJECTS[@]}"
 do
   fancy_echo "Installing $i"
-  curl -o "$HOME/$i.local" --remote-name "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
+  curl -o "$HOME/.$i.local" --remote-name "https://raw.githubusercontent.com/omadahealth/laptop/master/projects/.$i.local"
   sh ".$i.local" 2>&1 | tee ~/laptop.log
 done
 ###################################################

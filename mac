@@ -146,7 +146,8 @@ fi
 
 if [ ! -d "$HOME/workspace/dotfiles" ]; then
   git clone git@github.com:omadahealth/dotfiles.git "$HOME/workspace"
-  append_to_bash_profile "source '$HOME/workspace/dotfiles/dotfiles.sh'"
+  # shellcheck disable=SC2016
+  append_to_bash_profile 'source "$HOME/workspace/dotfiles/dotfiles.sh"'
 fi
 
 ###################### Install Homebrew & Packages #############################################

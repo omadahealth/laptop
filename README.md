@@ -29,6 +29,14 @@ sudo sh ~/mac 2>&1 | tee ~/laptop.log
 
 Once the script is done, it's a good idea to quit and relaunch Terminal.
 
+If you want project specific or other customizations (more info in further sections), there's an example `.laptop.local` file here:
+
+```sh
+curl -o ~/.laptop.local --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
+```
+
+If you download it, it will be run when you run the regular mac script.
+
 Debugging
 ---------
 
@@ -110,7 +118,7 @@ This repo already contains a .laptop.local you can use to get started.
 Either grab it from the repo or you can download it to your home directory using the command below.
 
 ```sh
-curl -o ~/mac --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
+curl -o ~/.laptop.local --remote-name https://raw.githubusercontent.com/omadahealth/laptop/master/.laptop.local
 ```
 
 Optional tools currently in `laptop.local`

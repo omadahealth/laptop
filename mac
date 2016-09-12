@@ -211,9 +211,9 @@ brew_install_or_upgrade "imagemagick"
 
 # Databases
 brew_install_or_upgrade "postgresql"
-fancy_echo "If postgresql was installed, you will need to run 'brew services start postgresql' to start it."
+brew services start postgresql
 brew_install_or_upgrade "redis"
-fancy_echo "If redis was installed, you will need to run 'brew services start redis' to start it."
+brew services start redis
 
 # Elasticsearch
 brew_cask_install "java"

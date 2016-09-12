@@ -19,6 +19,7 @@ sudo pip install pyx12
 brew_cask_install "java"
 brew_install_or_upgrade "qt55"
 brew link --force "qt55"
+conditional_exit "Have you installed the full version of Xcode? (NOT just the command line tools)"
 if ! app_is_installed 'Xcode'; then
   fancy_echo "You must install Xcode from the App Store before installing capybara-webkit"
 else

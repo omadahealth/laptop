@@ -5,6 +5,7 @@ fancy_echo "Welcome to Orange!"
 brew_install_or_upgrade "phantomjs"
 brew_install_or_upgrade "watchman"
 brew_install_or_upgrade "gnupg"
+append_to_bash_profile 'export PATH="/usr/local/opt/gnupg/libexec/gpgbin:$PATH"'
 brew_install_or_upgrade "optipng"
 brew_install_or_upgrade "jpegoptim"
 brew_install_or_upgrade "libxmlsec1"
